@@ -1,13 +1,13 @@
 //:::::Variables:::::
-//Trabajar con tamaño de modulo constante
+//Trabajar con tamano de modulo constante
 const tModulo = 50;
 //variable para pitch
 let pitch;
 //pixeles por modulo X y Y
 let mPixeles;
-//tamaño total de la pantalla en X en cm
+//tamano total de la pantalla en X en cm
 let tTotalX;
-//tamaño total de la pantalla en Y en cm
+//tamano total de la pantalla en Y en cm
 let tTotalY;
 //cantidad de pixeles en total
 let tPixelesT;
@@ -22,9 +22,10 @@ let modulosY;
 //pedir data parte 1
 mPixeles = parseInt (prompt("Cuantos Pixeles tienen tus modulos en X de 50cmx50cm?"));
 tTotalX = parseInt (prompt("de que tamaño sera tu pantalla en cm en largo (Minimo 50cm)"));
-tTotalY = parseInt (prompt("de que tamaño sera tu pantalla en cm en Alto(Minimo 50cm)"));
+tTotalY = parseInt (prompt("de que tamaño sera tu pantalla en cm en Alto (Minimo 50cm)"));
 
-//Obligar a dar data
+//Obligar a dar data y convertir los NaN en 0 para usar if
+//tamano x
 if (Number.isNaN(tTotalX)) {
     console.log("antes de"+tTotalX);
     tTotalX = 0;
@@ -37,30 +38,33 @@ tTotalX = parseInt (prompt("de que tamaño sera tu pantalla en cm en largo"));
     tTotalX = 0;
     }
   }
+//tamano y
 if (Number.isNaN(tTotalY)) {
     console.log("antes de"+tTotalY);
     tTotalY = 0;
     console.log("despues de"+tTotalY);
     alert("necesito información");
   }
-  while (tTotalY==0){
+while (tTotalY==0){
     tTotalY = parseInt (prompt("de que tamaño sera tu pantalla en cm en Alto")); 
         if (Number.isNaN(tTotalY)) {
         tTotalY = 0;
         }
       }
+//pixeles
 if (Number.isNaN(mPixeles)) {
         console.log("antes de"+mPixeles);
         mPixeles = 0;
         console.log("despues de"+mPixeles);
         alert("necesito información");
       }
-    while (mPixeles==0 || mPixeles==NaN){
+while (mPixeles==0 || mPixeles==NaN){
           mPixeles = parseInt (prompt("Cuantos Pixeles tienen tus modulos en X de 50cmx50cm?")); 
           if (Number.isNaN(mPixeles)) {
             mPixeles = 0;
           }          
         }  
+
 //cuantos modulos vas  anecesitar
 if(tTotalX>=50 || tTotalY>=50){
     modulosX = tTotalX/tModulo;
@@ -68,7 +72,7 @@ if(tTotalX>=50 || tTotalY>=50){
     modulos =  (tTotalX/tModulo) + (tTotalY/tModulo);
     alert("Necesitaras aproximadamente "+modulos+" modulos, "+modulosX+" modulos en X y "+modulosY+" modulos en Y");
 } else if(tTotalX<=49 || tTotalY<=49 || tTotalX>0 || tTotalY>0){
-    alert("Es muy pequeña la pantalla");
+    alert("Es muy pequeña la pantalla tus datos seran extraños");
     modulosX = tTotalX/tModulo;
     modulosY = tTotalY/tModulo;
     modulos =  (tTotalX/tModulo) + (tTotalY/tModulo);
@@ -92,10 +96,11 @@ if(mPixeles>0){
 }else {
     alert("no me has dado pixeles en X de tu modulo 50x50");
 }
-//Preguntar Salida de equipo 720*480/1920*1080/3840*2160
-let equipoSalidaX;
-let equipoSalidaY;
-let equipoSalidaT;
-//decir si tu equipo soporta la cantidad de pixeles
-//cuantos equipos como el tuyo necesitas para hacerlo
+
 //preguntar cuantas veces quiere hacer crecer su pantalla
+let crecer = parseInt (prompt("Cuantas veces quieres hacer crecer tu pantalla en X?"));
+for(let i=1;i<=crecer;i++){
+  console.log(i);
+  tPixelesX = tPixelesX *i;
+  alert("tu pantalla ahora seria de "+tPixelesX+" pixeles en x cuando sea "+i+" veces mas grande");
+}
