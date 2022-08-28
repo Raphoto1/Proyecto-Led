@@ -19,8 +19,29 @@ function borrarNan (notANum){
   console.log("despues de funcion directa"+notANum);
   return notANum;
 }
-function modulosCrecer(){
-  
+function crecerPantalla(){
+  let crecer = parseInt (prompt("Cuantas veces quieres hacer crecer tu pantalla?"));
+if (Number.isNaN(crecer)) {
+  let convertirNot = borrarNan (crecer);
+  crecer = convertirNot;
+}
+while (crecer==0){
+  crecer = parseInt (prompt("Cuantos Pixeles tienen tus modulos en X de 50cmx50cm?")); 
+  if (Number.isNaN(crecer)) {
+    let convertirNot = borrarNan (crecer);
+    crecer = convertirNot;
+    }          
+}
+//Output data 2
+for(let i=1;i<=crecer;i++){
+  console.log(i);
+  tamanoPixelesX = tamanoPixelesX *i;
+  tamanoPixelesY = tamanoPixelesY *i;
+  modulosX = modulosX *i;
+  modulosY = modulosY *i;
+  modulos = modulosX+modulosY;
+  alert("tu pantalla ahora seria de "+modulosX+" modulos en X "+modulosY+" modulos en Y, necesitarias un total de "+modulos+" modulos, el total de pixeles en x, "+tamanoPixelesY+" cuando sea "+i+" veces mas grande");
+}
 }
 //pedir data parte 1
 medidaPixelesModulo = parseInt (prompt("Cuantos Pixeles tienen tus modulos en X de 50cmx50cm?"));
@@ -88,11 +109,22 @@ if(medidaPixelesModulo>0){
 }else {
     alert("no me has dado pixeles en X de tu modulo 50x50");
 }
-
-//Pedir data 2 preguntar cuantas veces quiere hacer crecer su pantalla
-let crecer = parseInt (prompt("Cuantas veces quieres hacer crecer tu pantalla en X?"));
-for(let i=1;i<=crecer;i++){
-  console.log(i);
-  tamanoPixelesX = tamanoPixelesX *i;
-  alert("tu pantalla ahora seria de "+tamanoPixelesX+" pixeles en x cuando sea "+i+" veces mas grande");
+//preguntar si quiere cambiar 
+let crecerSiONo = parseInt(prompt("Quieres hacer crecer tu pantalla?, 1.Si, 2.No"))
+if (Number.isNaN(crecerSiONo)) {
+  let convertirNot = borrarNan (crecerSiONo);
+  crecerSiONo = convertirNot;
+}
+while (crecerSiONo==0){
+  crecerSiONo = parseInt (prompt("Quieres hacer crecer tu pantalla?, 1.Si, 2.No")); 
+  if (Number.isNaN(crecerSiONo)) {
+    let convertirNot = borrarNan (crecerSiONo);
+    crecerSiONo = convertirNot;
+    }          
+}
+switch(crecerSiONo){
+  case(1):
+  crecerPantalla();
+  case(2):
+  alert("gracias por tu consulta");
 }
