@@ -24,8 +24,15 @@ mPixeles = parseInt (prompt("Cuantos Pixeles tienen tus modulos en X de 50cmx50c
 tTotalX = parseInt (prompt("de que tamaño sera tu pantalla en cm en largo (Minimo 50cm)"));
 tTotalY = parseInt (prompt("de que tamaño sera tu pantalla en cm en Alto (Minimo 50cm)"));
 
-//Obligar a dar data y convertir los NaN en 0 para usar if
+//Obligar a dar data y convertir los NaN en 0 para usar if y ahora function
 //tamano x
+function borrarNan (Nan){
+    console.log("antes de"+Nan);
+    Nan = 0;
+    console.log("despues de"+Nan);
+    alert("necesito información en funcion");
+    return resultado;
+}
 if (Number.isNaN(tTotalX)) {
     console.log("antes de"+tTotalX);
     tTotalX = 0;
