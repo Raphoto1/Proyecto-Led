@@ -63,3 +63,6 @@ switch (verifyData) {
     alert("gracias por tu consulta, mas funciones vendran en el futuro");
 }
 
+function sumar(){
+  
+}
