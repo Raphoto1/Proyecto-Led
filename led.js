@@ -1,11 +1,13 @@
 //Trabajar con tamano de modulo constante
 const screenModuleSize = 50;
 class screen {
-  constructor(id,pixelSizeX,screenSizeX,screenSizeY,module){
+  constructor(id,pixelSizeX,screenSizeX,screenSizeY,moduleNumberX,moduleNumberY,module){
     this.id = id;
     this.pixelSizeX = pixelSizeX;
     this.screenSizeX = screenSizeX;
     this.screenSizeY = screenSizeY;
+    this.moduleNumberX = moduleNumberX;
+    this.moduleNumberY = moduleNumberY;
     this.module = screenModuleSize;
   }
 }
@@ -36,7 +38,9 @@ for(i=1;i<=screenNumber;i++){
   pixelSizeX = parseInt(prompt('cuantos pixeles en X tienen tus modulos de la pantalla numero '+i));
   screenSizeX = parseInt(prompt('que tamaño tiene en cm en X tu pantalla numero'+i));
   screenSizeY = parseInt(prompt('que tamaño tiene en cm en Y tu pantalla numero'+i));
-  const createScreen = new screen(i,pixelSizeX,screenSizeX,screenSizeY);
+  moduleNumberX = screenSizeX/screenModuleSize;
+  moduleNumberY = screenSizeY/screenModuleSize;
+  const createScreen = new screen(i,pixelSizeX,screenSizeX,screenSizeY,moduleNumberX,moduleNumberY);
   screenGroup.push(createScreen);
 } 
 alert('Has creado un total de '+screenGroup.length+' pantallas');
@@ -62,7 +66,19 @@ switch (verifyData) {
   case 2:
     alert("gracias por tu consulta, mas funciones vendran en el futuro");
 }
+//crear funcion superior para calcular pixeles en planos x y Y
+function calcPixels(screenGroup, plane){
 
-function sumar(){
-  
 }
+
+let modulesStageTotal = 0;
+for (let i=0;i<screenGroup.length;i++){
+  modulesStageTotal = modulesStageTotal + screenGroup[i].moduleNumberX*screenGroup[i].moduleNumberY;
+}
+alert("Necesitaras un total de "+modulesStageTotal+" modulos");
+
+let pixelsTotalX = 0;
+for (let i=0;i<screenGroup.length;i++){
+  pixelsTotalX = pixelsTotalX + screenGroup[i].moduleNumberX*screenGroup[i].pixelSizeX;
+}
+alert("El total de pixeles de tu montaje en X sera "+pixelsTotalX);
