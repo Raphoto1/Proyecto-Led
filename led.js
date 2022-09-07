@@ -19,7 +19,7 @@ function eraseNan(notANum) {
 }
 
 let screenNumber = 0;
-screenNumber = parseInt(prompt("cuantas pantallas ncesitas configurar?"))
+screenNumber = parseInt(prompt("cuantas pantallas necesitas configurar?"))
 if (Number.isNaN(screenNumber)){
   let changeNan = eraseNan(screenNumber);
   screenNumber = changeNan;
@@ -34,8 +34,8 @@ while(screenNumber==0){
 for(i=1;i<=screenNumber;i++){
   screenNumber = screenNumber++;
   pixelSizeX = parseInt(prompt('cuantos pixeles en X tienen tus modulos de la pantalla numero '+i));
-  screenSizeX = parseInt(prompt('que tamaño tiene en cm en X tu pantalla numero'+i));
-  screenSizeY = parseInt(prompt('que tamaño tiene en cm en Y tu pantalla numero'+i));
+  screenSizeX = parseInt(prompt('que tamaño tiene en cm en X tu pantalla numero '+i));
+  screenSizeY = parseInt(prompt('que tamaño tiene en cm en Y tu pantalla numero '+i));
   moduleNumberX = screenSizeX/screenModuleSize;
   moduleNumberY = screenSizeY/screenModuleSize;
   const createScreen = new Screen(i,pixelSizeX,screenSizeX,screenSizeY,moduleNumberX,moduleNumberY);
@@ -60,9 +60,8 @@ while (verifyData == 0) {
 }
 switch (verifyData) {
   case 1:
-    //recorrer array uno a uno y crear texto de cada pantalla
     screenGroup.forEach(e => {
-      alert(`tu pantalla numero ${e.id} tendra un tamaño de ${e.screenSizeX} en X, y ${e.screenSizeY} en Y, necesitaras un total de ${e.moduleNumberX*e.moduleNumberY} modulos`);
+      alert(`tu pantalla numero ${e.id} tendra un tamaño de ${e.screenSizeX} cm en X, y ${e.screenSizeY} cm en Y, necesitaras un total de ${e.moduleNumberX*e.moduleNumberY} modulos`);
       alert(`tu pantalla numero ${e.id} tendra un tamaño en pixeles en X de ${e.moduleNumberX*e.pixelSizeX} y en Y de ${e.moduleNumberY*e.pixelSizeX}`);
     });
   case 2:
@@ -83,3 +82,6 @@ for (let i=0;i<screenGroup.length;i++){
 }
 alert("El total de pixeles de tu montaje en X sera "+pixelsTotalX);
 alert("El total de pixeles de tu montaje en Y sera "+pixelsTotalY);
+
+const highestPixelX = screenGroup.sort((a,b)=> b.pixelSizeX-a.pixelSizeX);
+  alert(`tu diseñador agradecera que le informes que la cantidad de pixeles de los espacios vacios seran de ${highestPixelX[0].pixelSizeX*2} por cada metro, recuerda que la mejor manera de calcular estos vacios es con la pantalla con mayor cantidad de pixeles que es la pantalla numero ${highestPixelX[0].id}`)
