@@ -1,6 +1,6 @@
 //Trabajar con tamano de modulo constante
 const screenModuleSize = 50;
-class screen {
+class Screen {
   constructor(id,pixelSizeX,screenSizeX,screenSizeY,moduleNumberX,moduleNumberY,module){
     this.id = id;
     this.pixelSizeX = pixelSizeX;
@@ -14,9 +14,7 @@ class screen {
 screenGroup = [];
 
 function eraseNan(notANum) {
-  console.log("antes de funcion directa" + notANum);
   notANum = 0;
-  console.log("despues de funcion directa" + notANum);
   return notANum;
 }
 
@@ -40,14 +38,14 @@ for(i=1;i<=screenNumber;i++){
   screenSizeY = parseInt(prompt('que tamaño tiene en cm en Y tu pantalla numero'+i));
   moduleNumberX = screenSizeX/screenModuleSize;
   moduleNumberY = screenSizeY/screenModuleSize;
-  const createScreen = new screen(i,pixelSizeX,screenSizeX,screenSizeY,moduleNumberX,moduleNumberY);
+  const createScreen = new Screen(i,pixelSizeX,screenSizeX,screenSizeY,moduleNumberX,moduleNumberY);
   screenGroup.push(createScreen);
 } 
 alert('Has creado un total de '+screenGroup.length+' pantallas');
 
 screenGroup.sort((a,b)=> a.screenSizeX - b.screenSizeX);
-const holdData = JSON.stringify(screenGroup);
-let verifyData = parseInt(prompt('quieres verificar la informacion ingresada? 1.Si 2.No'))
+
+let verifyData = parseInt(prompt('quieres verificar la informacion ingresada?(de la pantalla de menor a mayor tamaño en X) 1.Si 2.No'))
 if (Number.isNaN(verifyData)) {
   let changeNan = eraseNan(verifyData);
   verifyData = changeNan;
@@ -62,13 +60,13 @@ while (verifyData == 0) {
 }
 switch (verifyData) {
   case 1:
-    alert(holdData);
+    //recorrer array uno a uno y crear texto de cada pantalla
+    screenGroup.forEach(e => {
+      alert(`tu pantalla numero ${e.id} tendra un tamaño de ${e.screenSizeX} en X, y ${e.screenSizeY} en Y, necesitaras un total de ${e.moduleNumberX*e.moduleNumberY} modulos`);
+      alert(`tu pantalla numero ${e.id} tendra un tamaño en pixeles en X de ${e.moduleNumberX*e.pixelSizeX} y en Y de ${e.moduleNumberY*e.pixelSizeX}`);
+    });
   case 2:
-    alert("gracias por tu consulta, mas funciones vendran en el futuro");
-}
-//crear funcion superior para calcular pixeles en planos x y Y
-function calcPixels(screenGroup, plane){
-
+    alert("gracias por tu consulta, ahora te daremos el total de modulos y el tamaño en pixeles de tu montaje completo");
 }
 
 let modulesStageTotal = 0;
@@ -78,7 +76,10 @@ for (let i=0;i<screenGroup.length;i++){
 alert("Necesitaras un total de "+modulesStageTotal+" modulos");
 
 let pixelsTotalX = 0;
+let pixelsTotalY = 0;
 for (let i=0;i<screenGroup.length;i++){
   pixelsTotalX = pixelsTotalX + screenGroup[i].moduleNumberX*screenGroup[i].pixelSizeX;
+  pixelsTotalY = pixelsTotalY + screenGroup[i].moduleNumberY*screenGroup[i].pixelSizeX;
 }
 alert("El total de pixeles de tu montaje en X sera "+pixelsTotalX);
+alert("El total de pixeles de tu montaje en Y sera "+pixelsTotalY);
