@@ -11,31 +11,20 @@
     <h1>Calculadora montaje led</h1>
     <p>Por favor ingresa la siguiente información para ayudarte, recuerda que estamos trabajando con modulos de 50cm X 50 cm y las medidas se indicaran en cm</p>
     <div id="contenedorData">
-        <form>
+        <form id="formScreen">
             <ul>
                 <li>
                     <label for="numberScreen">Cuantas pantallas quieres Configurar</label>
                     <input type="number" id="numberScreen" name="screenCount">
                 </li>
-                <!-- esta parte estaria oculta hasta que se ingrese la cantidad de pantallas -->
                 <li>
-                    <label for="pixelX">Pixeles de tu pantalla #</label>
-                    <input type="number" id="pixelX" name="pixelSizeX">
-                </li>
-                <li>
-                    <label for="screenSizeX">Tamaño de tu pantalla # en X</label>
-                    <input type="number" id="screenSizeX" name="sizeScreenX">
-                </li>
-                <li>
-                    <label>Tamaño de tu pantalla # en Y</label>
-                    <input type="number" id="screenSizeY" name="sizeScreenY">
-                </li>
-                <li>
-                    <button type="submit">Calcular</button>
+                    <button type="submit" id="acceptScreens">Confirmar Pantallas</button>
                     <button type="reset">Reset</button>
                 </li>
             </ul>
         </form>
+    </div>
+    <div id="checkScreens">
     </div>
     <div id="contenedorResultados">
         <!-- Revisar para hacer visualizacion grafica con un grid o mientras solo la tabla -->
