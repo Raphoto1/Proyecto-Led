@@ -1,6 +1,6 @@
 //Trabajar con tamano de modulo constante
 const screenModuleSize = 50;
-//constructores
+//constructores y array contenedor
 class Screen {
   constructor(id,pixelSizeX,screenSizeX,screenSizeY,moduleNumberX,moduleNumberY,module){
     this.id = id;
@@ -21,11 +21,6 @@ class Screen {
     </form>
     `
     chkScreens.innerHTML += singleScreen;
-  }
-}
-class NewButton{
-  constructor(a,b,c){
-
   }
 }
 let screenGroup = [];
@@ -50,8 +45,7 @@ function captureScreens(e){
   createScreensArray();
   chkScreens.append(createCalcButton);
   formScreen.remove();
-  const calcData = document.getElementById(`calcular`);
-  calcData.addEventListener("click", captureData);
+  buttonInteractiveCreation();
 }
 function createScreensArray(){
 for(i=1;i<=screenNumber;i++){
@@ -59,61 +53,68 @@ for(i=1;i<=screenNumber;i++){
   pixelSizeX = document.getElementById(`pixelX${i}`);
   screenSizeX = document.getElementById(`screenSizeX${i}`);
   screenSizeY = document.getElementById(`screenSizeY${i}`);
-  moduleNumberX = screenSizeX/screenModuleSize;
-  moduleNumberY = screenSizeY/screenModuleSize;
+  moduleNumberX = 0;
+  moduleNumberY = 0;
   const createScreen = new Screen(i,pixelSizeX,screenSizeX,screenSizeY,moduleNumberX,moduleNumberY);
   screenGroup.push(createScreen);
 }
 }
+function buttonInteractiveCreation(){
+  const calcData = document.getElementById(`calcular`);
+  calcData.addEventListener("click", captureData);
+}
+function calcScreenmodules(a,b){
+  let answer = a/b;
+  return answer;
+}
 function captureData(e){
   e.preventDefault();
-  alert("funciona");
+  screenGroup.forEach(element => {
+    pSX = document.getElementById("pixelX"+element.id);
+    element.pixelSizeX = parseInt(pSX.value);
+    sSX = document.getElementById("screenSizeX"+element.id);
+    element.screenSizeX = parseInt(sSX.value);
+    sSY = document.getElementById("screenSizeY"+element.id);
+    element.screenSizeY = parseInt(sSY.value);
+    element.moduleNumberX = calcScreenmodules(element.screenSizeX,element.module);
+    element.moduleNumberY = calcScreenmodules(element.screenSizeY,element.module);
+    console.log(element);
+    displayData(element.id,element.moduleNumberX,element.moduleNumberY,
+      element.screenSizeX,element.screenSizeY,element.pixelSizeX);
+  });
+chkScreens.remove();
+}
+function displayData(id,moduleNumberX,moduleNumberY,screenSizeX,screenSizeY,pixelSizeX){
+  let totalmodules = moduleNumberX*moduleNumberY;
+  let totalPixelsX = moduleNumberX*pixelSizeX;
+  let totalPixelsY = moduleNumberY*pixelSizeX;
+
+  const singleScreenData = `
+  <h2>Tu pantalla ${id} de ${screenSizeX} cm a lo largo y ${screenSizeY} cm a lo alto</h2>
+  <ul>
+  <li>
+      Necesitara un total de ${totalmodules} Modulos
+  </li>
+  <li>
+      necesitara ${moduleNumberX} Modulos en X
+  </li>
+  <li>
+      necesitara ${moduleNumberY} Modulos en Y
+  </li>
+  <li>
+      Tendra ${totalPixelsX} pixeles en X
+  </li>
+  <li>
+      Tendra ${totalPixelsY} pixeles en Y
+  </li>
+  <li>
+      tu sistema debera soportar ${totalPixelsY*totalPixelsX} pixeles
+  </li>
+</ul>
+    `
+    resultsContainer.innerHTML += singleScreenData;
 }
 //Eventos
 formScreen.addEventListener("submit", captureScreens);
-//funcion calcular data
 
-// alert('Has creado un total de '+screenGroup.length+' pantallas');
 
-// screenGroup.sort((a,b)=> a.screenSizeX - b.screenSizeX);
-
-// let verifyData = parseInt(prompt('quieres verificar la informacion ingresada?(de la pantalla de menor a mayor tamaño en X) 1.Si 2.No'))
-// if (Number.isNaN(verifyData)) {
-//   let changeNan = eraseNan(verifyData);
-//   verifyData = changeNan;
-// }
-// while (verifyData == 0) {
-//   verifyData = parseInt(
-//     prompt("quieres verificar la informacion ingresada?(de la pantalla de menor a mayor tamaño en X) 1.Si 2.No"));
-//   if (Number.isNaN(verifyData)) {
-//     let changeNan = borrarNan(verifyData);
-//     verifyData = changeNan;
-//   }
-// }
-// switch (verifyData) {
-//   case 1:
-//     screenGroup.forEach(e => {
-//       alert(`tu pantalla numero ${e.id} tendra un tamaño de ${e.screenSizeX} cm en X, y ${e.screenSizeY} cm en Y, necesitaras un total de ${e.moduleNumberX*e.moduleNumberY} modulos`);
-//       alert(`tu pantalla numero ${e.id} tendra un tamaño en pixeles en X de ${e.moduleNumberX*e.pixelSizeX} y en Y de ${e.moduleNumberY*e.pixelSizeX}`);
-//     });
-//   case 2:
-//     alert("gracias por tu consulta, ahora te daremos el total de modulos y el tamaño en pixeles de tu montaje completo");
-// }
-
-// let modulesStageTotal = 0;
-// for (let i=0;i<screenGroup.length;i++){
-//   modulesStageTotal = modulesStageTotal + screenGroup[i].moduleNumberX*screenGroup[i].moduleNumberY;
-// }
-// alert("Necesitaras un total de "+modulesStageTotal+" modulos");
-
-// let pixelsTotalX = 0;
-// let pixelsTotalY = 0;
-// for (let i=0;i<screenGroup.length;i++){
-//   pixelsTotalX = pixelsTotalX + screenGroup[i].moduleNumberX*screenGroup[i].pixelSizeX;
-//   pixelsTotalY = pixelsTotalY + screenGroup[i].moduleNumberY*screenGroup[i].pixelSizeX;
-// }
-// alert("El total de pixeles de tu montaje en X sera "+pixelsTotalX);
-// alert("El total de pixeles de tu montaje en Y sera "+pixelsTotalY);
-
-// const highestPixelX = screenGroup.sort((a,b)=> b.pixelSizeX-a.pixelSizeX);
-//   alert(`tu diseñador agradecera que le informes que la cantidad de pixeles de los espacios vacios seran de ${highestPixelX[0].pixelSizeX*2} por cada metro, recuerda que la mejor manera de calcular estos vacios es con la pantalla con mayor cantidad de pixeles que es la pantalla numero ${highestPixelX[0].id}`)
