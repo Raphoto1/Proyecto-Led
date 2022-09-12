@@ -10,6 +10,7 @@ class Screen {
     this.moduleNumberX = moduleNumberX;
     this.moduleNumberY = moduleNumberY;
     this.module = screenModuleSize;
+    
     const singleScreen = `
     <form id="pantalla${this.id}">  
           <label for="pixel${this.id}">Pixeles de tu pantalla ${this.id}</label>
@@ -50,11 +51,11 @@ function captureScreens(e){
 function createScreensArray(){
 for(i=1;i<=screenNumber;i++){
   screenNumber = screenNumber++;
-  pixelSizeX = document.getElementById(`pixelX${i}`);
-  screenSizeX = document.getElementById(`screenSizeX${i}`);
-  screenSizeY = document.getElementById(`screenSizeY${i}`);
-  moduleNumberX = 0;
-  moduleNumberY = 0;
+  let pixelSizeX = document.getElementById(`pixelX${i}`);
+  let screenSizeX = document.getElementById(`screenSizeX${i}`);
+  let screenSizeY = document.getElementById(`screenSizeY${i}`);
+  let moduleNumberX = 0;
+  let moduleNumberY = 0;
   const createScreen = new Screen(i,pixelSizeX,screenSizeX,screenSizeY,moduleNumberX,moduleNumberY);
   screenGroup.push(createScreen);
 }
@@ -70,11 +71,11 @@ function calcScreenmodules(a,b){
 function captureData(e){
   e.preventDefault();
   screenGroup.forEach(element => {
-    pSX = document.getElementById("pixelX"+element.id);
+    let pSX = document.getElementById("pixelX"+element.id);
     element.pixelSizeX = parseInt(pSX.value);
-    sSX = document.getElementById("screenSizeX"+element.id);
+    let sSX = document.getElementById("screenSizeX"+element.id);
     element.screenSizeX = parseInt(sSX.value);
-    sSY = document.getElementById("screenSizeY"+element.id);
+    let sSY = document.getElementById("screenSizeY"+element.id);
     element.screenSizeY = parseInt(sSY.value);
     element.moduleNumberX = calcScreenmodules(element.screenSizeX,element.module);
     element.moduleNumberY = calcScreenmodules(element.screenSizeY,element.module);
