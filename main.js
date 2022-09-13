@@ -49,7 +49,7 @@ function captureScreens(e){
   buttonInteractiveCreation();
 }
 function createScreensArray(){
-for(i=1;i<=screenNumber;i++){
+for(let i=1;i<=screenNumber;i++){
   screenNumber = screenNumber++;
   let pixelSizeX = document.getElementById(`pixelX${i}`);
   let screenSizeX = document.getElementById(`screenSizeX${i}`);
